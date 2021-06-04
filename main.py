@@ -46,17 +46,10 @@ class TestfirstStep(unittest.TestCase):
 
     Methods
     -------
-    test_create_board_method() -> method to check create_board() method
-                                  of the Board class
-
-    test_change_colors_method() -> method to check change_colors() method
-                                   of the ColorBoard class
-
-    test_get_connected_neighbour_method() -> method to check get_connected_neighbour()
-                                            method of the ColorBoard class
-
-    test_start_game_method() -> method to check start_game() method
-                                of the ColorBoard class
+    test_create_board_method()
+    test_change_colors_method()
+    test_get_connected_neighbour_method()
+    test_start_game_method()
 
     """
 
@@ -92,7 +85,9 @@ class TestfirstStep(unittest.TestCase):
     change_colors_result_origin_test_2 = 2
 
     def test_create_board_method(self):
-
+        """
+        method to check create_board() method of the Board class
+        """
         self.assertEqual(
             self.color_board_test_1.get_board(),
             self.create_board_result_test_1)
@@ -108,7 +103,9 @@ class TestfirstStep(unittest.TestCase):
                 self.color_board_test_2.number_of_colors))
 
     def test_change_colors_method(self):
-
+        """
+        method to check change_colors() method of the ColorBoard class
+        """
         colored_board, visited, origin_color = self.color_board_test_1.change_colors(x=0,
                                                                                      y=1,
                                                                                      visited_tiles=[],
@@ -126,7 +123,10 @@ class TestfirstStep(unittest.TestCase):
         self.assertEqual(origin_color, self.change_colors_result_origin_test_2)
 
     def test_get_connected_neighbour_method(self):
+        """
+        method to check get_connected_neighbour() method of the ColorBoard class
 
+        """
         # Testing for board with 3 colors
         colored_board, visited, origin_color = self.color_board_test_1.change_colors(
             x=0, y=1, visited_tiles=[], chosen_color=1)
@@ -154,6 +154,9 @@ class TestfirstStep(unittest.TestCase):
                 x=0, y=0, matrix=colored_board), 6)
 
     def test_start_game_method(self):
+        """
+        method to check start_game() method of the ColorBoard class
+        """
         self.assertEqual(self.color_board_test_1.start_game(), 6)
         self.assertEqual(self.color_board_test_2.start_game(), 7)
 
