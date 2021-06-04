@@ -227,7 +227,7 @@ class Color_Board(Board):
         tiles_connected = 0
         minimum_turn_needed = 1
 
-        while tiles_connected != 25:
+        while tiles_connected != self.number_of_rows*self.number_of_rows:
             chosen_color, colors_with_connected_tiles = self.select_color()
 
             colored_board, visited, origin_color = self.change_colors(x=0,
