@@ -84,6 +84,12 @@ class Color_Board(Board):
                     
         return tile_count
 
+    def identify_connected_tile(self, x:int, y:int, matrix: list, adjacent_tiles:int, chosen_color:int, queue:set):
+
+        if matrix[x][y] == adjacent_tiles:
+            matrix[x][y] = chosen_color
+            queue.add((x, y))
+
     def change_colors(self,
                       x: int = 0,
                       y: int = 0,
@@ -115,7 +121,6 @@ class Color_Board(Board):
         """
 
         queue = {(x, y)}
-        connected_neighbours = 1
 
         if not matrix:
             matrix = deepcopy(self.board[:])
@@ -136,40 +141,26 @@ class Color_Board(Board):
                (x + 1, y) not in visited_tiles and \
                (x + 1, y) not in queue:
 
-                if matrix[x + 1][y] == adjacent_tiles:
-                    matrix[x][y] = chosen_color
-                    matrix[x + 1][y] = chosen_color
-                    queue.add((x + 1, y))
+                self.identify_connected_tile(x+1, y, matrix, adjacent_tiles, chosen_color, queue)
 
             if x - 1 >= 0 and \
                (x - 1, y) not in visited_tiles and \
                (x - 1, y) not in queue:
 
-                if matrix[x - 1][y] == adjacent_tiles:
-                    matrix[x][y] = chosen_color
-                    matrix[x - 1][y] = chosen_color
+                self.identify_connected_tile(x-1, y, matrix, adjacent_tiles, chosen_color, queue)
 
-                    if matrix[x - 1][y] == adjacent_tiles:
-                        connected_neighbours += 1
-                    queue.add((x - 1, y))
 
             if y - 1 >= 0 and \
                (x, y - 1) not in visited_tiles and \
                (x, y - 1) not in queue:
 
-                if matrix[x][y - 1] == adjacent_tiles:
-                    matrix[x][y] = chosen_color
-                    matrix[x][y - 1] = chosen_color
-                    queue.add((x, y - 1))
+                self.identify_connected_tile(x, y-1, matrix, adjacent_tiles, chosen_color, queue)
 
             if y + 1 < len(matrix[0]) and \
                (x, y + 1) not in visited_tiles and \
                (x, y + 1) not in queue:
-               
-                if matrix[x][y + 1] == adjacent_tiles:
-                    matrix[x][y] = chosen_color
-                    matrix[x][y + 1] = chosen_color
-                    queue.add((x, y + 1))
+
+                self.identify_connected_tile(x, y+1, matrix, adjacent_tiles, chosen_color, queue)
                     
             if adjacent_tiles == origin_color:
                 matrix[x][y] = chosen_color
@@ -225,7 +216,7 @@ class Color_Board(Board):
 
         """
         tiles_connected = 0
-        minimum_turn_needed = 1
+        minimum_turn_needed = 0
 
         while tiles_connected != self.number_of_rows*self.number_of_rows:
             chosen_color, colors_with_connected_tiles = self.select_color()
@@ -240,12 +231,12 @@ class Color_Board(Board):
                                                   visited_tiles=visited,
                                                   matrix=colored_board,
                                                   chosen_color=chosen_color)
+            minimum_turn_needed += 1
             self.board = colored_board
             tiles_connected = colors_with_connected_tiles[chosen_color]
             print(
-                "\nColored board with index {} and maximum connection {}.".format(
-                    chosen_color, tiles_connected))
-            minimum_turn_needed += 1
+                "\nTurn {}. Colored board with index {} and maximum connection {}.".format(
+                    minimum_turn_needed, chosen_color, tiles_connected))
             self.print_board()
 
         print(

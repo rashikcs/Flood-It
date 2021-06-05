@@ -151,13 +151,13 @@ class TestfirstStep(unittest.TestCase):
                                                                     chosen_color=1)
         self.assertEqual(
             self.color_board_test_2.get_connected_tiles(
-                x=0, y=0, matrix=colored_board), 6)
+                x=0, y=0, matrix=colored_board), 1)
 
     def test_start_game_method(self):
         """
         method to check start_game() method of the ColorBoard class
         """
-        self.assertEqual(self.color_board_test_1.start_game(), 6)
+        self.assertEqual(self.color_board_test_1.start_game(), 5)
         self.assertEqual(self.color_board_test_2.start_game(), 7)
 
 
