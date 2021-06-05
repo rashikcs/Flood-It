@@ -1,7 +1,7 @@
 from Board import Board
 from copy import deepcopy
 
-class Color_Board(Board):
+class FloodItGame(Board):
     """
     A class used to color the board with an objective
     of minimum turns to color the whole board.
@@ -206,41 +206,3 @@ class Color_Board(Board):
 
         return colors_with_connected_tiles.index(
             max(colors_with_connected_tiles)), colors_with_connected_tiles
-
-    def start_game(self,):
-        """Colors the board choosing the best available choice by iterating all available colors.
-
-        This function iteratively finds out the color resulting the maximum tile conection
-        and stops when all the tiles colored using the same color. 
-
-
-        """
-        tiles_connected = 0
-        minimum_turn_needed = 0
-
-        while tiles_connected != self.number_of_rows*self.number_of_rows:
-            chosen_color, colors_with_connected_tiles = self.select_color()
-
-            colored_board, visited, origin_color = self.change_colors(x=0,
-                                                        y=1,
-                                                        visited_tiles=[],
-                                                        chosen_color=chosen_color)
-            colored_board, _, _ = self.change_colors(x=1,
-                                                  y=0,
-                                                  origin_color = origin_color,
-                                                  visited_tiles=visited,
-                                                  matrix=colored_board,
-                                                  chosen_color=chosen_color)
-            minimum_turn_needed += 1
-            self.board = colored_board
-            tiles_connected = colors_with_connected_tiles[chosen_color]
-            print(
-                "\nTurn {}. Colored board with index {} and maximum connection {}.".format(
-                    minimum_turn_needed, chosen_color, tiles_connected))
-            self.print_board()
-
-        print(
-            "Minimum turns needed to finish the game: ",
-            minimum_turn_needed)
-
-        return minimum_turn_needed
