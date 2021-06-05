@@ -51,8 +51,10 @@ class PlayerSimulator:
         while tiles_connected != self.flood_it_game.board_obj.number_of_rows**2:
             chosen_color, colors_with_connected_tiles = self.flood_it_game.select_color()
 
-            colored_board, visited, origin_color = self.flood_it_game.change_colors(
-                x=0, y=1, visited_tiles=[], chosen_color=chosen_color)
+            colored_board, visited, origin_color = self.flood_it_game.change_colors(x=0,
+                                                                                    y=1,
+                                                                                    visited_tiles=[], 
+                                                                                    chosen_color=chosen_color)
             colored_board, _, _ = self.flood_it_game.change_colors(x=1,
                                                                    y=0,
                                                                    origin_color=origin_color,
