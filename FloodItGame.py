@@ -26,7 +26,7 @@ class FloodItGame(Board):
         Board.create_board(self,)
 
     def get_connected_tiles(self, x=0, y=0, matrix=[]) -> int:
-        """Returns the count of connected tiles till origin.
+        """Returns the count of connected tiles from origin.
 
         This function takes the board as a matrix, and
         calculates the total tiles connected to the origin.
