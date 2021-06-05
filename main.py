@@ -1,3 +1,4 @@
+from Board import Board
 from FloodItGame import FloodItGame
 from PlayerSimulator import PlayerSimulator
 import unittest
@@ -55,8 +56,8 @@ class TestClassMethods(unittest.TestCase):
 
     """
 
-    FloodItGame_test_1 = FloodItGame(5, 3)
 
+    # Results for the 1st test
     create_board_result_test_1 = [[2, 1, 2, 0, 2],
                                   [2, 0, 1, 0, 1],
                                   [1, 2, 0, 0, 1],
@@ -71,7 +72,7 @@ class TestClassMethods(unittest.TestCase):
     FloodItGame_change_colors_return2_test_1 = [(0, 1), (0, 0)]
     FloodItGame_change_colors_return3_test_1 = 2
 
-    FloodItGame_test_2 = FloodItGame(5, 4)
+    # Results for the 2nd test
     create_board_result_test_2 = [[2, 0, 1, 2, 0],
                                   [3, 3, 1, 0, 3],
                                   [0, 1, 0, 0, 1],
@@ -91,23 +92,26 @@ class TestClassMethods(unittest.TestCase):
         method to check create_board() method of the Board class
         """
 
-        self.assertEqual(self.FloodItGame_test_1.get_board(),
+        self.assertEqual(FloodItGame_test_1.board_obj.get_board(),
                          self.create_board_result_test_1)
-        self.FloodItGame_test_1.print_board(
-            '\nCreated Board with {} colors.'.format(
-                self.FloodItGame_test_1.number_of_colors))
 
-        self.assertEqual(self.FloodItGame_test_2.get_board(),
-                         self.create_board_result_test_2)
-        self.FloodItGame_test_2.print_board(
+        FloodItGame_test_1.board_obj.print_board(
             '\nCreated Board with {} colors.'.format(
-                self.FloodItGame_test_2.number_of_colors))
+                FloodItGame_test_1.board_obj.number_of_colors))
+
+
+        self.assertEqual(FloodItGame_test_2.board_obj.get_board(),
+                         self.create_board_result_test_2)
+
+        FloodItGame_test_2.board_obj.print_board(
+            '\nCreated Board with {} colors.'.format(
+                FloodItGame_test_2.board_obj.number_of_colors))
 
     def test_FloodItGame_change_colors_method(self):
         """
         method to check change_colors() method of the FloodItGame class
         """
-        colored_board, visited, origin_color = self.FloodItGame_test_1.change_colors(x=0,
+        colored_board, visited, origin_color = FloodItGame_test_1.change_colors(x=0,
                                                                                      y=1,
                                                                                      visited_tiles=[],
                                                                                      chosen_color=1)
@@ -115,7 +119,7 @@ class TestClassMethods(unittest.TestCase):
         self.assertEqual(visited, self.FloodItGame_change_colors_return2_test_1)
         self.assertEqual(origin_color, self.FloodItGame_change_colors_return3_test_1)
 
-        colored_board, visited, origin_color = self.FloodItGame_test_2.change_colors(x=0,
+        colored_board, visited, origin_color = FloodItGame_test_2.change_colors(x=0,
                                                                                      y=1,
                                                                                      visited_tiles=[],
                                                                                      chosen_color=1)
@@ -130,31 +134,31 @@ class TestClassMethods(unittest.TestCase):
         """
 
         # Testing for board with 3 colors
-        colored_board, visited, origin_color = self.FloodItGame_test_1.change_colors(x=0,
+        colored_board, visited, origin_color = FloodItGame_test_1.change_colors(x=0,
                                                                                      y=1,
                                                                                      visited_tiles=[],
                                                                                      chosen_color=1)
-        colored_board, _, _ = self.FloodItGame_test_1.change_colors(x=1,
+        colored_board, _, _ = FloodItGame_test_1.change_colors(x=1,
                                                                     y=0,
                                                                     visited_tiles=visited,
                                                                     origin_color=origin_color,
                                                                     matrix=colored_board,
                                                                     chosen_color=1)
-        self.assertEqual(self.FloodItGame_test_1.get_connected_tiles(x=0, y=0, matrix=colored_board),
+        self.assertEqual(FloodItGame_test_1.get_connected_tiles(x=0, y=0, matrix=colored_board),
                          4)
 
         # Testing for board with 4 colors
-        colored_board, visited, origin_color = self.FloodItGame_test_2.change_colors(x=0,
+        colored_board, visited, origin_color = FloodItGame_test_2.change_colors(x=0,
                                                                                      y=1,
                                                                                      visited_tiles=[],
                                                                                      chosen_color=1)
-        colored_board, _, _ = self.FloodItGame_test_2.change_colors(x=1,
+        colored_board, _, _ = FloodItGame_test_2.change_colors(x=1,
                                                                     y=0,
                                                                     visited_tiles=visited,
                                                                     origin_color=origin_color,
                                                                     matrix=colored_board,
                                                                     chosen_color=1)
-        self.assertEqual(self.FloodItGame_test_2.get_connected_tiles(x=0,
+        self.assertEqual(FloodItGame_test_2.get_connected_tiles(x=0,
                                                                      y=0,
                                                                      matrix=colored_board),
                          1)
@@ -163,14 +167,17 @@ class TestClassMethods(unittest.TestCase):
         """
         method to check play_flood_it() method of the PlayerSimulator class
         """
-        player = PlayerSimulator()
-
-        player.init_game(self.FloodItGame_test_1, 20)
+        player.init_game(FloodItGame_test_1, 20)
         self.assertEqual(player.play_flood_it(), 5)
 
-        player.init_game(self.FloodItGame_test_2, 20)
+        player.init_game(FloodItGame_test_2, 20)
         self.assertEqual(player.play_flood_it(), 7)
 
 
 if __name__ == "__main__":
+    
+    FloodItGame_test_1 = FloodItGame(Board(5, 3))
+    FloodItGame_test_2 = FloodItGame(Board(5, 4))
+    player = PlayerSimulator()
+
     unittest.main()

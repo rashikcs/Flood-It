@@ -25,7 +25,8 @@ class Board:
         self.number_of_colors = number_of_colors
         self.board = []
         self.seed = 30
-
+        self.create_board()
+        
     def create_board(self,):
         """
         Create board with the given rows and colors.
@@ -37,6 +38,7 @@ class Board:
                 self.board[row].append(
                     random.randint(
                         0, self.number_of_colors - 1))
+        print("Board created of {}x{} with {} colors".format(self.number_of_rows, self.number_of_rows, self.number_of_colors))
 
     def get_board(self,):
         """

@@ -9,9 +9,7 @@ class FloodItGame(Board):
 
     Attributes
     ----------
-    minimum_turn_needed : int
-
-    board:
+    board_obj : Board
 
     Methods
     -------
@@ -21,9 +19,8 @@ class FloodItGame(Board):
     start_game()
     """
 
-    def __init__(self, number_of_rows: int, number_of_colors: int):
-        Board.__init__(self, number_of_rows, number_of_colors)
-        Board.create_board(self,)
+    def __init__(self, board: Board):
+        self.board_obj = board
 
     def get_connected_tiles(self, x=0, y=0, matrix=[]) -> int:
         """Returns the count of connected tiles from origin.
@@ -123,7 +120,7 @@ class FloodItGame(Board):
         queue = {(x, y)}
 
         if not matrix:
-            matrix = deepcopy(self.board[:])
+            matrix = deepcopy(self.board_obj.board[:])
             
         if not origin_color:
             origin_color = matrix[0][0]
@@ -179,9 +176,9 @@ class FloodItGame(Board):
             colors_with_connected_tiles:list -> colors and associated number of connections
 
         """
-        colors_with_connected_tiles = [0] * self.number_of_colors
+        colors_with_connected_tiles = [0] * self.board_obj.number_of_colors
 
-        for i in range(0, self.number_of_colors):
+        for i in range(0, self.board_obj.number_of_colors):
 
             colored_board = []
 

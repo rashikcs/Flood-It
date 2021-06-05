@@ -1,5 +1,3 @@
-from Board import Board
-
 from FloodItGame import FloodItGame
 
 
@@ -50,8 +48,7 @@ class PlayerSimulator:
         tiles_connected = 0
         minimum_turn_needed = 0
 
-        while tiles_connected != self.flood_it_game.number_of_rows * \
-                self.flood_it_game.number_of_rows:
+        while tiles_connected != self.flood_it_game.board_obj.number_of_rows**2:
             chosen_color, colors_with_connected_tiles = self.flood_it_game.select_color()
 
             colored_board, visited, origin_color = self.flood_it_game.change_colors(
@@ -63,18 +60,16 @@ class PlayerSimulator:
                                                                    matrix=colored_board,
                                                                    chosen_color=chosen_color)
             minimum_turn_needed += 1
-            self.flood_it_game.board = colored_board
+            self.flood_it_game.board_obj.board = colored_board
             tiles_connected = colors_with_connected_tiles[chosen_color]
             print(
                 "\nTurn {}. Colored board with index {} and maximum connection {}.".format(
                     minimum_turn_needed,
                     chosen_color,
                     tiles_connected))
-            self.flood_it_game.print_board()
+            self.flood_it_game.board_obj.print_board()
 
-        print(
-            "Turns needed to finish the game: ",
-            minimum_turn_needed)
+        print("Turns needed to finish the game: ", minimum_turn_needed)
         self.get_result(minimum_turn_needed)
 
         return minimum_turn_needed
