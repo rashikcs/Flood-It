@@ -3,8 +3,8 @@ from copy import deepcopy
 
 class FloodItGame(Board):
     """
-    A class used to color the board with an objective
-    of minimum turns to color the whole board.
+    A class used to color the board of all
+    connected tiles to the origin.
     ...
 
     Attributes
@@ -16,7 +16,6 @@ class FloodItGame(Board):
     change_colors()
     get_connected_tiles()
     select_color()
-    start_game()
     """
 
     def __init__(self, board: Board):

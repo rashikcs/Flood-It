@@ -17,6 +17,7 @@ class Board:
     -------
     create_board()
     print_board()
+    get_board()
     """
 
     def __init__(self, number_of_rows: int, number_of_colors: int):
