@@ -1,6 +1,6 @@
 from Board import Board
 
-class Player:
+class PlayerSimulator:
     """
     A class used to represent the player
 
@@ -20,7 +20,7 @@ class Player:
 
         self.minimum_turns = minimum_turns
         self.name = name
-        print("New Player: {} initialized!".format(name))
+        print("New Simulated Player: {} initialized!".format(name))
 
 
     def select_color(self, board_obj: Board, change_neighbour_colors, get_connected_tiles):

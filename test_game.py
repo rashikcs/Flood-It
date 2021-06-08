@@ -165,7 +165,7 @@ class TestClassMethods(unittest.TestCase):
 
     def test_PlayerSimulator_play_flood_it_method(self):
         """
-        method to check play_flood_it() method of the PlayerSimulator class
+        method to check start_flood_it() method of the FloodItGame class
         """
 
         self.assertEqual(FloodItGame_test_1.start_flood_it(), 5)

@@ -1,5 +1,5 @@
 from Board import Board
-from Player import Player
+from PlayerSimulator import PlayerSimulator
 from copy import deepcopy
 
 class FloodItGame(Board):
@@ -11,7 +11,7 @@ class FloodItGame(Board):
     Attributes
     ----------
     board_obj : Board
-    player : Player
+    player : FloodItGame
 
     Methods
     -------
@@ -25,7 +25,7 @@ class FloodItGame(Board):
     def __init__(self, number_of_rows: int, number_of_colors: int, minimum_turns:int = 20, player_name:str = 'SmartPlayer'):
 
         self.board_obj = Board(number_of_rows, number_of_colors)
-        self.player = Player(minimum_turns, player_name)
+        self.player = PlayerSimulator(minimum_turns, player_name)
         print("New Flood-It Game Initialized!")
 
     def get_connected_tiles(self, x=0, y=0, matrix=[]) -> int:
