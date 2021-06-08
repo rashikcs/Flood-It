@@ -1,8 +1,31 @@
 from Board import Board
 
+
 class Player:
     """
-    A class used to represent the player
+    A class used to represent players
+
+    ...
+
+    Attributes
+    ----------
+    name : str
+
+    Methods
+    -------
+    select_color()
+    """
+    def __init__(self, name:str = "SmartPlayer"):
+        self.name = name
+
+    @classmethod
+    def init_player(self,):
+        raise NotImplementedError
+
+
+class FloodItPlayerSimulator(Player):
+    """
+    A class used to represent the flood it player.
 
     ...
 
@@ -16,14 +39,15 @@ class Player:
     select_color()
     """
 
-    def __init__(self, minimum_turns: int, name:str = "SmartPlayer"):
+    def __init__(self, name:str = "Smart Mouth"):
+        Player.__init__(self, name)
+
+    def init_player(self, minimum_turns: int = 20)->None:
 
         self.minimum_turns = minimum_turns
-        self.name = name
-        print("New Player: {} initialized!".format(name))
+        print("\n{} player initialized.\nMinimum Turns: {}".format(self.name, self.minimum_turns))
 
-
-    def select_color(self, board_obj: Board, change_neighbour_colors, get_connected_tiles):
+    def select_color(self, board_obj: Board, change_neighbour_colors, get_connected_tiles)->tuple:
         """Returns the index of the color resulted the maximum connection
            and associated array holding the connection with each color.
 
@@ -62,9 +86,6 @@ class Player:
 
             colors_with_connected_tiles[i] = get_connected_tiles(
                 x=0, y=0, matrix=colored_board)
-            
-            
-        #print("color index", colors_with_connected_tiles)
 
         return colors_with_connected_tiles.index(
             max(colors_with_connected_tiles)), colors_with_connected_tiles
