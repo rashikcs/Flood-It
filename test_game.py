@@ -167,17 +167,17 @@ class TestClassMethods(unittest.TestCase):
         """
         method to check play_flood_it() method of the PlayerSimulator class
         """
-        player.init_game(FloodItGame_test_1, 20)
+        player.init_game(5, 3, 20)
         self.assertEqual(player.play_flood_it(), 5)
 
-        player.init_game(FloodItGame_test_2, 20)
+        player.init_game(5, 4, 20)
         self.assertEqual(player.play_flood_it(), 7)
 
 
 if __name__ == "__main__":
     
-    FloodItGame_test_1 = FloodItGame(Board(5, 3))
-    FloodItGame_test_2 = FloodItGame(Board(5, 4))
+    FloodItGame_test_1 = FloodItGame(5, 3)
+    FloodItGame_test_2 = FloodItGame(5, 4)
     player = PlayerSimulator()
 
     unittest.main()

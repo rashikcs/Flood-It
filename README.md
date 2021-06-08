@@ -5,7 +5,7 @@ Flood It is a popular one-player game that is available on many smart phones.
 - A class used to construct and represent the Board.
 	```
   ### usage
-  >>> board_obj = Board(number_of_rows:int, number_of_colors:int)
+  >>> board_obj = Board(number_of_rows, number_of_colors)
   >>> board_obj.create_board()
   >>> board_obj.print_board()
   >>> board = board_obj.get_board()
@@ -16,7 +16,7 @@ Flood It is a popular one-player game that is available on many smart phones.
   connected tiles to the origin.
 	```
   ### usage
-  >>> floodit_obj = FloodItGame(board_obj)
+  >>> floodit_obj = FloodItGame(number_of_rows, number_of_colors)
   >>> colored_board, visited, origin_color = floodit_obj.change_colors(origin_x,
                                                                        origin_y,
                                                                        origin_color,
@@ -33,7 +33,7 @@ Flood It is a popular one-player game that is available on many smart phones.
 	```
   # usage
   >>> player = PlayerSimulator()
-  >>> player.init_game(floodit_obj, minimum_turns_avialable)
+  >>> player.init_game(number_of_rows, number_of_colors, minimum_turns_avialable)
   >>> player.play_flood_it()
   >>> player.get_results(turns_used:int)
 	```

@@ -18,8 +18,8 @@ class FloodItGame(Board):
     select_color()
     """
 
-    def __init__(self, board: Board):
-        self.board_obj = board
+    def __init__(self, number_of_rows: int, number_of_colors: int):
+        self.board_obj = Board(number_of_rows, number_of_colors)
 
     def get_connected_tiles(self, x=0, y=0, matrix=[]) -> int:
         """Returns the count of connected tiles from origin.

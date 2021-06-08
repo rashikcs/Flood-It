@@ -23,10 +23,10 @@ class PlayerSimulator:
         self.minimum_turns = None
         self.flood_it_game = None
 
-    def init_game(self, flood_it_game: FloodItGame, minimum_turns: int):
+    def init_game(self, number_of_rows: int, number_of_colors: int, minimum_turns: int):
 
         self.minimum_turns = minimum_turns
-        self.flood_it_game = flood_it_game
+        self.flood_it_game = FloodItGame(number_of_rows, number_of_colors)
 
         print("New Game Initialized!")
 
