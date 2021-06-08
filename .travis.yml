@@ -3,4 +3,4 @@ python:
   - "3.6"
 
 # command to run tests
-script: python test_game
+script: python test_game.py
