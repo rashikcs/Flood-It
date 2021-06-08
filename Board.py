@@ -28,7 +28,7 @@ class Board:
         self.seed = 30
         self.create_board()
         
-    def create_board(self,):
+    def create_board(self,)->None:
         """
         Create board with the given rows and colors.
         """
@@ -41,13 +41,13 @@ class Board:
                         0, self.number_of_colors - 1))
         print("\nBoard created of {}x{} with {} colors".format(self.number_of_rows, self.number_of_rows, self.number_of_colors))
 
-    def get_board(self,):
+    def get_board(self,)->list:
         """
-        returns the board.
+        returns the created board.
         """
         return self.board
 
-    def print_board(self, text:str = "Showing Board."):
+    def print_board(self, text:str = "Showing Board.")->None:
         """
         Prints the board.
         """

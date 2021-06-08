@@ -1,8 +1,19 @@
 from Board import Board
-from PlayerSimulator import PlayerSimulator
 from copy import deepcopy
 
-class FloodItGame(Board):
+
+class Game:
+    """
+    An abstract class used to represent the Game.
+    Need to implement play_game() method.
+
+    """
+
+    @classmethod
+    def play_game(self,):
+        raise NotImplementedError
+
+class FloodItGame(Game):
     """
     A class used to manage the flood-it game -> color the board of all
     connected tiles to the origin.
@@ -11,22 +22,34 @@ class FloodItGame(Board):
     Attributes
     ----------
     board_obj : Board
+<<<<<<< HEAD:FloodItGame.py
     player : FloodItGame
+=======
+    name : str
+>>>>>>> development_branch:Game.py
 
     Methods
     -------
     change_neighbour_colors()
     identify_connected_tile()
     get_connected_tiles()
-    start_flood_it()
+    play_game() *** abstract method
     print_result()
     """
 
-    def __init__(self, number_of_rows: int, number_of_colors: int, minimum_turns:int = 20, player_name:str = 'SmartPlayer'):
+    def __init__(self, name:str = "Flood-It"):
+        self.name = name
+
+    def init_game(self, number_of_rows: int = 5, number_of_colors: int = 4)->None:
 
         self.board_obj = Board(number_of_rows, number_of_colors)
+<<<<<<< HEAD:FloodItGame.py
         self.player = PlayerSimulator(minimum_turns, player_name)
         print("New Flood-It Game Initialized!")
+=======
+        print("{} Game initialized!".format(self.name))
+        self.board_obj.print_board()
+>>>>>>> development_branch:Game.py
 
     def get_connected_tiles(self, x=0, y=0, matrix=[]) -> int:
         """Returns the count of connected tiles from origin.
@@ -109,7 +132,7 @@ class FloodItGame(Board):
                       origin_color = None,
                       visited_tiles: list = [],
                       matrix: list = None,
-                      chosen_color: int = 3):
+                      chosen_color: int = 3)->tuple:
         """Returns the colored board and all visited nodes of the board.
 
         This function changes colors of the
@@ -180,19 +203,20 @@ class FloodItGame(Board):
 
         return matrix, visited_tiles, origin_color
 
-    def print_result(self, minimum_turn_needed)->None:
+    def print_result(self, minimum_turn_needed, player)->None:
         """
         Print result of the game.
         Args:
             minimum_turn_needed:int
         """
         
-        if minimum_turn_needed <= self.player.minimum_turns:
-            print("{} wins the game!!".format(self.player.name))
+        if minimum_turn_needed <= player.minimum_turns:
+            print("Player:{} wins the game!!".format(player.name))
         else:
-            print("{} loses!!".format(self.player.name))
+            print("Player:{} loses!!".format(player.name))
 
-    def start_flood_it(self,)->None:
+
+    def play_game(self, player)->int:
         """Colors the board choosing the best available choice by iterating all available colors.
 
         This function iteratively finds out the color resulting the maximum tile conection
@@ -204,7 +228,7 @@ class FloodItGame(Board):
         turn_count = 0
 
         while tiles_connected != self.board_obj.number_of_rows**2:
-            chosen_color, colors_with_connected_tiles = self.player.select_color(self.board_obj, self.change_neighbour_colors, self.get_connected_tiles)
+            chosen_color, colors_with_connected_tiles = player.select_color(self.board_obj, self.change_neighbour_colors, self.get_connected_tiles)
 
             colored_board, visited, origin_color = self.change_neighbour_colors(x=0,
                                                                       y=1,
@@ -228,11 +252,11 @@ class FloodItGame(Board):
 
             self.board_obj.print_board()
 
-            if turn_count > self.player.minimum_turns:
+            if turn_count > player.minimum_turns:
                 break
 
 
         print("Total Turns made in the game: ", turn_count)
-        self.print_result(turn_count)
+        self.print_result(turn_count, player)
 
         return turn_count
