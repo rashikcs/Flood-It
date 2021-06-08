@@ -35,7 +35,7 @@ this game through a very simple greedy strategy.
 - This class acts as a facade to interact with the above-mentioned classes which create and manage game and player. Finally shows result of the game.
   ```
   # usage
-  >>> flood_it_game_mananger = GameManager(game_name = "Flood-It")
+  >>> flood_it_game_mananger = GameManager(game_name = "Flood-It", player_name)
   >>> flood_it_game_mananger.init_game(number_of_rows=12, number_of_colors=5, minimum_turns=20)
   >>> flood_it_game_mananger.start_game()
   ```
