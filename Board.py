@@ -39,7 +39,7 @@ class Board:
                 self.board[row].append(
                     random.randint(
                         0, self.number_of_colors - 1))
-        print("Board created of {}x{} with {} colors".format(self.number_of_rows, self.number_of_rows, self.number_of_colors))
+        print("\nBoard created of {}x{} with {} colors".format(self.number_of_rows, self.number_of_rows, self.number_of_colors))
 
     def get_board(self,):
         """

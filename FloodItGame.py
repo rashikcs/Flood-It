@@ -1,25 +1,32 @@
 from Board import Board
+from Player import Player
 from copy import deepcopy
 
 class FloodItGame(Board):
     """
-    A class used to color the board of all
+    A class used to manage the flood-it game -> color the board of all
     connected tiles to the origin.
     ...
 
     Attributes
     ----------
     board_obj : Board
+    player : Player
 
     Methods
     -------
-    change_colors()
+    change_neighbour_colors()
+    identify_connected_tile()
     get_connected_tiles()
-    select_color()
+    start_flood_it()
+    print_result()
     """
 
-    def __init__(self, number_of_rows: int, number_of_colors: int):
+    def __init__(self, number_of_rows: int, number_of_colors: int, minimum_turns:int = 20, player_name:str = 'SmartPlayer'):
+
         self.board_obj = Board(number_of_rows, number_of_colors)
+        self.player = Player(minimum_turns, player_name)
+        print("New Flood-It Game Initialized!")
 
     def get_connected_tiles(self, x=0, y=0, matrix=[]) -> int:
         """Returns the count of connected tiles from origin.
@@ -80,13 +87,23 @@ class FloodItGame(Board):
                     
         return tile_count
 
-    def identify_connected_tile(self, x:int, y:int, matrix: list, adjacent_tiles:int, chosen_color:int, queue:set):
+    def identify_connected_tile(self, x:int, y:int, matrix: list, adjacent_tiles:int, chosen_color:int, queue:set)->None:
+        """
+        Identifies the connected tiles and add it to queue to visit.
+        Args:
+
+            x:int -> x pos of the adjacent tiles of origin
+            y:int -> y pos of the adjacent tiles of origin
+            matrix:int -> Input grid/board
+            chosen_color:int -> choosen color.
+            queue:set -> queue of the tiles to visit
+        """
 
         if matrix[x][y] == adjacent_tiles:
             matrix[x][y] = chosen_color
             queue.add((x, y))
 
-    def change_colors(self,
+    def change_neighbour_colors(self,
                       x: int = 0,
                       y: int = 0,
                       origin_color = None,
@@ -163,42 +180,59 @@ class FloodItGame(Board):
 
         return matrix, visited_tiles, origin_color
 
-    def select_color(self, ):
-        """Returns the index of the color resulted the maximum connection
-           and associated array holding the values.
+    def print_result(self, minimum_turn_needed)->None:
+        """
+        Print result of the game.
+        Args:
+            minimum_turn_needed:int
+        """
+        
+        if minimum_turn_needed <= self.player.minimum_turns:
+            print("{} wins the game!!".format(self.player.name))
+        else:
+            print("{} loses!!".format(self.player.name))
 
-        This function finds out the color resulting the maximum tile conection
-        and returns the values.
+    def start_flood_it(self,)->None:
+        """Colors the board choosing the best available choice by iterating all available colors.
 
-        Returns:
-            chosen color:int -> Colors resulting maximum connection
-            colors_with_connected_tiles:list -> colors and associated number of connections
+        This function iteratively finds out the color resulting the maximum tile conection
+        and stops when all the tiles colored using the same color.
+
 
         """
-        colors_with_connected_tiles = [0] * self.board_obj.number_of_colors
+        tiles_connected = 0
+        turn_count = 0
 
-        for i in range(0, self.board_obj.number_of_colors):
+        while tiles_connected != self.board_obj.number_of_rows**2:
+            chosen_color, colors_with_connected_tiles = self.player.select_color(self.board_obj, self.change_neighbour_colors, self.get_connected_tiles)
 
-            colored_board = []
+            colored_board, visited, origin_color = self.change_neighbour_colors(x=0,
+                                                                      y=1,
+                                                                      visited_tiles=[],
+                                                                      chosen_color=chosen_color)
+            colored_board, _, _ = self.change_neighbour_colors(x=1,
+                                                     y=0,
+                                                     origin_color=origin_color,
+                                                     visited_tiles=visited,
+                                                     matrix=colored_board,
+                                                     chosen_color=chosen_color)
+            turn_count += 1
+            self.board_obj.board = colored_board
+            tiles_connected = colors_with_connected_tiles[chosen_color]
 
-            colored_board, visited, origin_color = self.change_colors(x=0,
-                                                        y=1,
-                                                        visited_tiles=[],
-                                                        matrix=None,
-                                                        chosen_color=i)
+            print(
+                "\nTurn {}. Colored board with index {} and maximum connection {}.".format(
+                    turn_count,
+                    chosen_color,
+                    tiles_connected))
 
-            colored_board, _, _ = self.change_colors(x=1,
-                                                  y=0,
-                                                  visited_tiles=visited,
-                                                  origin_color = origin_color,
-                                                  matrix=colored_board,
-                                                  chosen_color=i)
+            self.board_obj.print_board()
 
-            colors_with_connected_tiles[i] = self.get_connected_tiles(
-                x=0, y=0, matrix=colored_board)
-            
-            
-        #print("color index", colors_with_connected_tiles)
+            if turn_count > self.player.minimum_turns:
+                break
 
-        return colors_with_connected_tiles.index(
-            max(colors_with_connected_tiles)), colors_with_connected_tiles
+
+        print("Total Turns made in the game: ", turn_count)
+        self.print_result(turn_count)
+
+        return turn_count
