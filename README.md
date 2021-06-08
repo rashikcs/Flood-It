@@ -23,7 +23,7 @@ this game through a very simple greedy strategy.
 
 ## FloodItPlayerSimulator Class: 
 - A class which inherits the player class and used to represent the floodit player which tries to solve the game iteratively by selecting the best color in each turn.
-  The select_color() methods needs to interact with the FloodItGame class in order to generate result.
+  The select_color() methods needs to interact with the FloodItGame class methods in order to generate the outcome.
   ```
   # usage
   >>> floodit_player_obj = FloodItPlayerSimulator(player_name)
