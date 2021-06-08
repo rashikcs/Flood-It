@@ -21,13 +21,6 @@ this game through a very simple greedy strategy.
    >>> floodit_game_obj.play_game(floodit_player_obj)
    ```
 
-<<<<<<< HEAD
-## PlayerSimulator Class: 
-- A class used to represent the player.
-  ```
-  # usage
-  >>> player = PlayerSimulator(minimum_turns, player_name)
-=======
 ## FloodItPlayerSimulator Class: 
 - A class which inherits the player class and used to represent the floodit player which tries to solve the game iteratively by selecting the best color in each turn.
   The select_color() methods needs to interact with the FloodItGame class methods in order to generate the outcome.
@@ -36,20 +29,13 @@ this game through a very simple greedy strategy.
   >>> floodit_player_obj = FloodItPlayerSimulator(player_name)
   >>> floodit_player_obj.init_player(minimum_turns)
   >>> chosen_color, colors_with_connected_tiles = floodit_player_obj.select_color(board_obj, change_neighbour_colors, get_connected_tiles)
->>>>>>> development_branch
   ```
 
 ## GameManager Class: 
 - This class acts as a facade to interact with the above-mentioned classes which create and manage game and player. Finally shows result of the game.
   ```
-<<<<<<< HEAD
-  ### usage
-  >>> floodit_obj = FloodItGame(number_of_rows, number_of_colors, minimum_turns, player_name))
-  >>> floodit_obj.start_flood_it()
-=======
   # usage
   >>> flood_it_game_mananger = GameManager(game_name = "Flood-It", player_name)
   >>> flood_it_game_mananger.init_game(number_of_rows=12, number_of_colors=5, minimum_turns=20)
   >>> flood_it_game_mananger.start_game()
->>>>>>> development_branch
   ```

@@ -22,11 +22,7 @@ class FloodItGame(Game):
     Attributes
     ----------
     board_obj : Board
-<<<<<<< HEAD:FloodItGame.py
-    player : FloodItGame
-=======
     name : str
->>>>>>> development_branch:Game.py
 
     Methods
     -------
@@ -43,13 +39,8 @@ class FloodItGame(Game):
     def init_game(self, number_of_rows: int = 5, number_of_colors: int = 4)->None:
 
         self.board_obj = Board(number_of_rows, number_of_colors)
-<<<<<<< HEAD:FloodItGame.py
-        self.player = PlayerSimulator(minimum_turns, player_name)
-        print("New Flood-It Game Initialized!")
-=======
         print("{} Game initialized!".format(self.name))
         self.board_obj.print_board()
->>>>>>> development_branch:Game.py
 
     def get_connected_tiles(self, x=0, y=0, matrix=[]) -> int:
         """Returns the count of connected tiles from origin.

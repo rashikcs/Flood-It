@@ -192,11 +192,7 @@ class TestFloodItGameFunctions(unittest.TestCase):
 
     def test_play_game(self):
         """
-<<<<<<< HEAD:test_game.py
-        method to check start_flood_it() method of the FloodItGame class
-=======
         method to check play_game() method of the FloodItGame class
->>>>>>> development_branch:test_floodIt_game.py
         """
 
         self.assertEqual(FloodItGame_test_1.play_game(FloodItGame_test_1_player), 5)

@@ -25,16 +25,6 @@ class Player:
 
 class FloodItPlayerSimulator(Player):
     """
-    def __init__(self, name:str = "SmartPlayer"):
-        self.name = name
-
-    @classmethod
-    def init_player(self,):
-        raise NotImplementedError
-
-
-class FloodItPlayerSimulator(Player):
-    """
     A class used to represent the flood-it player and select color in each turn.
 
     ...
@@ -52,13 +42,7 @@ class FloodItPlayerSimulator(Player):
     def __init__(self, name:str = "Smart Mouth"):
         Player.__init__(self, name)
 
-<<<<<<< HEAD:PlayerSimulator.py
-        self.minimum_turns = minimum_turns
-        self.name = name
-        print("New Simulated Player: {} initialized!".format(name))
-=======
     def init_player(self, minimum_turns: int = 20)->None:
->>>>>>> development_branch:Player.py
 
         self.minimum_turns = minimum_turns
         print("\n{} player initialized.\nMinimum Turns: {}".format(self.name, self.minimum_turns))
