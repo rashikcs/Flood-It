@@ -24,5 +24,5 @@ Flood It is a popular one-player game that is available on many smart phones.
   ```
   ### usage
   >>> floodit_obj = FloodItGame(number_of_rows, number_of_colors, minimum_turns, player_name))
-  >>> colored_board, visited, origin_color = floodit_obj.start_flood_it()
+  >>> floodit_obj.start_flood_it()
   ```
