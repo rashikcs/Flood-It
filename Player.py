@@ -25,7 +25,7 @@ class Player:
 
 class FloodItPlayerSimulator(Player):
     """
-    A class used to represent the flood it player.
+    A class used to represent the flood-it player and select color in each turn.
 
     ...
 
