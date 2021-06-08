@@ -11,11 +11,11 @@ Flood It is a popular one-player game that is available on many smart phones.
   >>> board = board_obj.get_board()
   ```
 
-## Player Class: 
+## PlayerSimulator Class: 
 - A class used to represent the player.
   ```
   # usage
-  >>> player = Player(minimum_turns, player_name)
+  >>> player = PlayerSimulator(minimum_turns, player_name)
   ```
 
 ## FloodItGame Class: 
