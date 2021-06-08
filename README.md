@@ -32,7 +32,7 @@ this game through a very simple greedy strategy.
    ```
 
 ## GameManager Class: 
-- A class acts as a facade used to interact the above-mentioned classes which create and manage games and players.
+- This class acts as a facade to interact with the above-mentioned classes which create and manage game and player.
   ```
   # usage
   >>> flood_it_game_mananger = GameManager(game_name = "Flood-It")
