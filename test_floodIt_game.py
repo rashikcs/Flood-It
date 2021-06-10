@@ -1,6 +1,7 @@
+import unittest
 from copy import deepcopy
 from GameManager import GameManager
-import unittest
+
 
 class TestBoardFunctions(unittest.TestCase):
     """
@@ -60,8 +61,8 @@ class TestBoardFunctions(unittest.TestCase):
 
 class TestFloodItGameFunctions(unittest.TestCase):
     """
-    A class which is used to test the methods towards solving the flood-it game of 
-    FloodItGame and FloodItPlayerSimulator class methods.
+    A class which is used to test the methods towards solving the flood-it game by
+    checking FloodItGame and FloodItPlayerSimulator class methods.
     ...
 
     Attributes
@@ -195,23 +196,42 @@ class TestFloodItGameFunctions(unittest.TestCase):
         method to check play_game() method of the FloodItGame class
         """
 
-        self.assertEqual(FloodItGame_test_1.play_game(FloodItGame_test_1_player), 5)
-        self.assertEqual(FloodItGame_test_2.play_game(FloodItGame_test_2_player), 7)
+        self.assertEqual(FloodItGame_test_1.play_game(), 5)
+        self.assertEqual(FloodItGame_test_2.play_game(), 7)
 
+class TestFGameManagerFunctions(unittest.TestCase):
+
+    def test_found_game(self):
+        """
+        method to check found_game() method which checks
+        if the given exists n the GameManager class
+        """
+
+        self.assertEqual(flood_it_game_mananger.found_game('Flood-It'), True)
+        self.assertEqual(flood_it_game_mananger.found_game('Random'), False)
 
 if __name__ == "__main__":
     
-
-    flood_it_game_mananger = GameManager(game_name = "Flood-It")
+    game_name = "Flood-It"
+    flood_it_game_mananger = GameManager(game_name = game_name)
 
     #FloodItGame_test_1 : FloodItGame -> with a board of 3 colors and 5x5 rows and columns
-    flood_it_game_mananger.init_game(number_of_rows=5, number_of_colors=3, minimum_turns=20)
-    FloodItGame_test_1 = deepcopy(flood_it_game_mananger.game)
-    FloodItGame_test_1_player = deepcopy(flood_it_game_mananger.player)
+    flood_it_game_mananger.init_game(game_name = game_name,
+                                     number_of_rows=5,
+                                     number_of_colors=3,
+                                     player_name ='unittest1',
+                                     minimum_turns=20,
+                                     skip_player_save = True)
+    FloodItGame_test_1 = deepcopy(flood_it_game_mananger.game[game_name])
+
 
     #FloodItGame_test_2 : FloodItGame -> with a board of 4 colors and 5x5 rows and columns
-    flood_it_game_mananger.init_game(number_of_rows=5, number_of_colors=4, minimum_turns=20)
-    FloodItGame_test_2 = flood_it_game_mananger.game
-    FloodItGame_test_2_player = flood_it_game_mananger.player
+    flood_it_game_mananger.init_game(game_name = game_name,
+                                     number_of_rows=5,
+                                     number_of_colors=4,
+                                     player_name ='unittest2',
+                                     minimum_turns=20,
+                                     skip_player_save = True)
+    FloodItGame_test_2 = flood_it_game_mananger.game[game_name]
 
     unittest.main()
