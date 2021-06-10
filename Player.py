@@ -14,9 +14,49 @@ class Player:
     Methods
     -------
     select_color()
+    player_exists()
+    add_player()
     """
     def __init__(self, name:str = "SmartPlayer"):
         self.name = name
+
+    def player_exists(self, name:str, player_list:list)->bool:
+        """This function checks if the name already exists in the
+           db/players.txt: used as a db.
+
+        Args:
+
+            name:str
+            player_list:list -> existing player names in the files
+        
+        Return:
+
+            bool
+
+        """      
+        if name.lower()+"\n" in player_list:
+            return True
+        else:
+            False
+
+    def add_player(self, name:str, skip_player_save:bool = False)->None:
+        """Adds player to the db/players.txt file
+
+        Args:
+
+            name:str
+            skip_player_save:bool -> True if coming from unit test
+        """ 
+        players_file = open("db/players.txt" , "r+")
+        player_list = list(map(str.lower,players_file.readlines()))
+
+        if self.player_exists(name, player_list):
+            raise ValueError("Name '{}' exists already!!!".format(name))
+        else:
+            if not skip_player_save:
+                players_file.write(name+"\n")
+            self.name = name
+        players_file.close()
 
     @classmethod
     def init_player(self,):
@@ -39,13 +79,23 @@ class FloodItPlayerSimulator(Player):
     select_color()
     """
 
-    def __init__(self, name:str = "Smart Mouth"):
+    def __init__(self, name:str = "Smart Mouth", minimum_turns: int = 20):
         Player.__init__(self, name)
+        #self.init_player(minimum_turns)
 
-    def init_player(self, minimum_turns: int = 20)->None:
+    def init_player(self, minimum_turns:int, skip_player_save:bool = False)->None:
+        """This function initializes player name and minimum turns for the game
 
+        Args:
+
+            minimum_turns:int
+            skip_player_save:bool -> True if coming from unit test
+
+        """        
         self.minimum_turns = minimum_turns
-        print("\n{} player initialized.\nMinimum Turns: {}".format(self.name, self.minimum_turns))
+        self.add_player(self.name, skip_player_save)
+
+        print("\nPlayer: {} initialized.\nMinimum Turns: {}".format(self.name, self.minimum_turns))
 
     def select_color(self, board_obj: Board, change_neighbour_colors, get_connected_tiles)->tuple:
         """Returns the index of the color resulted the maximum connection

@@ -12,13 +12,18 @@ this game through a very simple greedy strategy.
   >>> board = board_obj.get_board()
   ```
 ## FloodItGame Class: 
--  A class which inherits the game class and used to manage and initiate the **flood-it game** -> color the board of all
-   connected tiles to the origin.
+-  A class which inherits the game class has access to the board and player and used to manage and initiate the **flood-it game** -> colors the board of 
+   all connected tiles to the origin.
    ```
    ### sample usage
    >>> floodit_game_obj = FloodItGame()
-   >>> floodit_game_obj.init_game(number_of_rows, number_of_colors)
-   >>> floodit_game_obj.play_game(floodit_player_obj)
+
+   >>> floodit_game_obj.init_game(number_of_rows,
+                                  number_of_colors,
+                                  player_name,
+                                  minimum_turns)
+
+   >>> floodit_game_obj.play_game()
    ```
 
 ## FloodItPlayerSimulator Class: 
@@ -27,15 +32,44 @@ this game through a very simple greedy strategy.
   ```
   # usage
   >>> floodit_player_obj = FloodItPlayerSimulator(player_name)
+
   >>> floodit_player_obj.init_player(minimum_turns)
-  >>> chosen_color, colors_with_connected_tiles = floodit_player_obj.select_color(board_obj, change_neighbour_colors, get_connected_tiles)
+
+  >>> chosen_color, colors_with_connected_tiles = floodit_player_obj.select_color(board_obj,
+                                                                                  change_neighbour_colors,
+                                                                                  get_connected_tiles)
   ```
 
 ## GameManager Class: 
 - This class acts as a facade to interact with the above-mentioned classes which create and manage game and player. Finally shows result of the game.
   ```
   # usage
-  >>> flood_it_game_mananger = GameManager(game_name = "Flood-It", player_name)
-  >>> flood_it_game_mananger.init_game(number_of_rows=12, number_of_colors=5, minimum_turns=20)
+  >>> flood_it_game_mananger = GameManager(game_name = "Flood-It")
+  
+  >>> flood_it_game_mananger.init_game(game_name = "Flood-It", 
+                                       number_of_rows=12,
+                                       number_of_colors=5,
+                                       player_name ='SimulatedPlayer',
+                                       minimum_turns=20)
+
   >>> flood_it_game_mananger.start_game()
+
+
+      Turn 19. Colored board with index 2 and maximum connection 144.
+      Showing Board.
+      2 2 2 2 2 2 2 2 2 2 2 2
+      2 2 2 2 2 2 2 2 2 2 2 2
+      2 2 2 2 2 2 2 2 2 2 2 2
+      2 2 2 2 2 2 2 2 2 2 2 2
+      2 2 2 2 2 2 2 2 2 2 2 2
+      2 2 2 2 2 2 2 2 2 2 2 2
+      2 2 2 2 2 2 2 2 2 2 2 2
+      2 2 2 2 2 2 2 2 2 2 2 2
+      2 2 2 2 2 2 2 2 2 2 2 2
+      2 2 2 2 2 2 2 2 2 2 2 2
+      2 2 2 2 2 2 2 2 2 2 2 2
+      2 2 2 2 2 2 2 2 2 2 2 2
+      Total Turns made in the game:  19
+      Player:SimulatedPlayer wins the game!!
+
   ```
