@@ -4,7 +4,7 @@ from Game import FloodItGame
 
 class GameManager:
     """
-    A class used to manage game
+    A class used to manage games
 
     ...
 
@@ -116,7 +116,7 @@ class GameManager:
 
     def start_games(self, )->None:
         """
-        Starts the game and shows result.
+        Starts all the active games.
         """
         if not self.active_games:
             print("Sorry! There are no active games")
