@@ -8,7 +8,7 @@ if __name__ == "__main__":
     flood_it_game_mananger.init_game(game_name = game_name,
     							     number_of_rows=12,
     								 number_of_colors=5,
-    								 player_name ='SimulatedPlayer' ,
+    								 player_name ='SimulatedPlayer',
     								 minimum_turns=20,
-    								 skip_player_save = True)
+    								 skip_player_save = False)
     flood_it_game_mananger.start_games()
